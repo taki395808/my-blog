@@ -20,13 +20,6 @@ tags: ["雑記", "ブログ"]
 
 このサイトは以下の技術で構築されています。
 
-```bash
-# プロジェクト作成
-npm create astro@latest my-blog
-cd my-blog
-npx astro add tailwind mdx
-```
-
 - **Astro** - 静的サイトジェネレーター
 - **Tailwind CSS** - スタイリング
 - **MDX** - Markdown + JSX
