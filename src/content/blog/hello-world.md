@@ -22,15 +22,15 @@ tags: ["雑記", "ブログ"]
 
 ```bash
 # プロジェクト作成
-npm create astro@latest my-portfolio
-cd my-portfolio
+npm create astro@latest my-blog
+cd my-blog
 npx astro add tailwind mdx
 ```
 
 - **Astro** - 静的サイトジェネレーター
 - **Tailwind CSS** - スタイリング
 - **MDX** - Markdown + JSX
-- **AWS S3 + CloudFront** - ホスティング
+- **GitHub Pages** - ホスティング
 
 ## これから
 
