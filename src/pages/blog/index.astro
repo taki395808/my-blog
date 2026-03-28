@@ -28,7 +28,7 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags))].sort();
     <div class="space-y-0 divide-y divide-[#1a1a1a]">
       {posts.map(post => (
         <article class="group py-6 first:pt-0">
-          <a href={`/blog/${post.id.replace(/\.(md|mdx)$/, '')}`} class="block hover:opacity-80 transition-opacity">
+          <a href={`${import.meta.env.BASE_URL}blog/${post.id.replace(/\.(md|mdx)$/, '')}`} class="block hover:opacity-80 transition-opacity">
             <div class="flex items-start justify-between gap-4">
               <div class="flex-1">
                 <h2 class="text-white font-semibold mb-1 group-hover:text-violet-300 transition-colors">

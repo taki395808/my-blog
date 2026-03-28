@@ -23,7 +23,7 @@ const { Content } = await render(post);
 
     <!-- Header -->
     <header class="mb-12">
-      <a href="/blog" class="inline-flex items-center gap-1 text-sm text-neutral-500 hover:text-violet-400 transition-colors mb-8 font-mono">
+      <a href={`${import.meta.env.BASE_URL}blog`} class="inline-flex items-center gap-1 text-sm text-neutral-500 hover:text-violet-400 transition-colors mb-8 font-mono">
         ← ブログ一覧
       </a>
       <h1 class="text-3xl font-bold text-white mb-4 leading-snug">
@@ -46,7 +46,7 @@ const { Content } = await render(post);
 
     <!-- Footer -->
     <footer class="mt-16 pt-8 border-t border-[#262626]">
-      <a href="/blog" class="inline-flex items-center gap-1 text-sm text-neutral-500 hover:text-violet-400 transition-colors font-mono">
+      <a href={`${import.meta.env.BASE_URL}blog`} class="inline-flex items-center gap-1 text-sm text-neutral-500 hover:text-violet-400 transition-colors font-mono">
         ← 一覧に戻る
       </a>
     </footer>
