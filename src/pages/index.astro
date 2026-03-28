@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Tag from '../components/Tag.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, 5);
+
+const projects = [
+  {
+    name: 'このブログサイト',
+    description: 'Astro + Tailwind CSS で構築した個人ポートフォリオ・学習記録サイト。GitHub Pages でホスティング。',
+    tags: ['Astro', 'TypeScript', 'GitHub Pages'],
+    url: 'https://taki395808.github.io/my-portfolio/',
+    repo: 'https://github.com/taki395808/my-portfolio',
+  },
+  // プロジェクトをここに追加してください
+];
+---
+
+<BaseLayout title="ホーム" description="エンジニアのポートフォリオと学習記録">
+  <div class="max-w-3xl mx-auto px-6 py-16">
+
+    <!-- Hero -->
+    <section class="mb-20">
+      <div class="font-mono text-sm text-violet-400 mb-4">$ whoami</div>
+      <h1 class="text-4xl font-bold text-white mb-4">Your Name</h1>
+      <p class="text-neutral-400 text-lg leading-relaxed mb-6">
+        ソフトウェアエンジニア。バックエンド・インフラ中心に学習中。<br />
+        このサイトでは学んだことや作ったものを記録しています。
+      </p>
+      <div class="flex flex-wrap gap-2">
+        {['TypeScript', 'Python', 'Go', 'AWS', 'Docker'].map(tech => (
+          <span class="font-mono text-xs px-2 py-1 rounded bg-[#161616] border border-[#262626] text-neutral-300">
+            {tech}
+          </span>
+        ))}
+      </div>
+    </section>
+
+    <!-- Recent Posts -->
+    <section class="mb-20">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-lg font-bold text-white font-mono">
+          <span class="text-violet-400">// </span>最近の記事
+        </h2>
+        <a href="/blog" class="text-sm text-neutral-500 hover:text-violet-400 transition-colors">
+          すべて見る →
+        </a>
+      </div>
+      <div class="space-y-4">
+        {posts.map(post => (
+          <article class="group">
+            <a href={`/blog/${post.id.replace(/\.(md|mdx)$/, '')}`} class="flex items-start justify-between gap-4 p-4 rounded-lg border border-[#262626] bg-[#161616]/50 hover:border-violet-800/50 hover:bg-[#161616] transition-all">
+              <div class="flex-1 min-w-0">
+                <h3 class="text-white font-medium group-hover:text-violet-300 transition-colors mb-1 truncate">
+                  {post.data.title}
+                </h3>
+                <p class="text-neutral-500 text-sm line-clamp-1">{post.data.description}</p>
+                <div class="flex flex-wrap gap-1.5 mt-2">
+                  {post.data.tags.slice(0, 3).map(tag => <Tag tag={tag} />)}
+                </div>
+              </div>
+              <time class="font-mono text-xs text-neutral-600 whitespace-nowrap pt-0.5">
+                {post.data.pubDate.toISOString().slice(0, 10)}
+              </time>
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section>
+      <h2 class="text-lg font-bold text-white font-mono mb-6">
+        <span class="text-violet-400">// </span>制作物
+      </h2>
+      <div class="grid gap-4">
+        {projects.map(project => (
+          <div class="p-5 rounded-lg border border-[#262626] bg-[#161616]/50">
+            <div class="flex items-start justify-between gap-4 mb-2">
+              <h3 class="text-white font-semibold">{project.name}</h3>
+              <div class="flex items-center gap-3 shrink-0">
+                {project.repo && (
+                  <a href={project.repo} target="_blank" rel="noopener noreferrer" class="text-xs text-neutral-500 hover:text-violet-400 transition-colors">
+                    GitHub
+                  </a>
+                )}
+                {project.url !== '#' && (
+                  <a href={project.url} target="_blank" rel="noopener noreferrer" class="text-xs text-neutral-500 hover:text-violet-400 transition-colors">
+                    公開サイト →
+                  </a>
+                )}
+              </div>
+            </div>
+            <p class="text-neutral-400 text-sm mb-3">{project.description}</p>
+            <div class="flex flex-wrap gap-1.5">
+              {project.tags.map(tag => <Tag tag={tag} />)}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>

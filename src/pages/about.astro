@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const skills = {
+  '言語': ['TypeScript', 'Python', 'Go', 'SQL'],
+  'フロントエンド': ['React', 'Astro', 'Tailwind CSS'],
+  'バックエンド': ['Node.js', 'FastAPI', 'PostgreSQL', 'Redis'],
+  'インフラ': ['AWS', 'Docker', 'Terraform', 'GitHub Actions'],
+};
+
+const timeline = [
+  { year: '2026', event: 'このブログ開設' },
+  // 経歴をここに追加
+];
+---
+
+<BaseLayout title="自己紹介" description="自己紹介・スキル・経歴">
+  <div class="max-w-3xl mx-auto px-6 py-16">
+    <h1 class="text-3xl font-bold text-white mb-2 font-mono">
+      <span class="text-violet-400">~/</span>about
+    </h1>
+    <p class="text-neutral-500 mb-12">自己紹介</p>
+
+    <!-- Profile -->
+    <section class="mb-14">
+      <div class="p-6 rounded-lg border border-[#262626] bg-[#161616]/50">
+        <div class="font-mono text-sm text-violet-400 mb-3">$ cat profile.txt</div>
+        <h2 class="text-xl font-bold text-white mb-3">Your Name</h2>
+        <p class="text-neutral-400 leading-relaxed">
+          ソフトウェアエンジニアです。バックエンド開発とインフラに興味があり、日々学習中。
+          このブログでは技術的な学びや作ったものを記録しています。
+        </p>
+        <div class="flex items-center gap-4 mt-4 text-sm">
+          <a href="https://github.com/taki395808" target="_blank" rel="noopener noreferrer" class="text-neutral-500 hover:text-violet-400 transition-colors">
+            GitHub →
+          </a>
+          <a href="https://twitter.com/taki395808" target="_blank" rel="noopener noreferrer" class="text-neutral-500 hover:text-violet-400 transition-colors">
+            X (Twitter) →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="mb-14">
+      <h2 class="text-lg font-bold text-white font-mono mb-6">
+        <span class="text-violet-400">// </span>スキル
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {Object.entries(skills).map(([category, items]) => (
+          <div class="p-4 rounded-lg border border-[#262626] bg-[#161616]/50">
+            <h3 class="font-mono text-xs text-violet-400 mb-3">{category}</h3>
+            <div class="flex flex-wrap gap-2">
+              {items.map(skill => (
+                <span class="font-mono text-xs px-2 py-1 rounded bg-neutral-900 border border-[#262626] text-neutral-300">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section>
+      <h2 class="text-lg font-bold text-white font-mono mb-6">
+        <span class="text-violet-400">// </span>経歴
+      </h2>
+      <div class="space-y-4">
+        {timeline.map(({ year, event }) => (
+          <div class="flex gap-6">
+            <span class="font-mono text-sm text-violet-400 shrink-0 w-12">{year}</span>
+            <span class="text-neutral-400 text-sm">{event}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>

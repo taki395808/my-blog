@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Tag from '../../components/Tag.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+// All unique tags
+const allTags = [...new Set(posts.flatMap(p => p.data.tags))].sort();
+---
+
+<BaseLayout title="ブログ" description="学習記録と技術メモ">
+  <div class="max-w-3xl mx-auto px-6 py-16">
+    <h1 class="text-3xl font-bold text-white mb-2 font-mono">
+      <span class="text-violet-400">~/</span>blog
+    </h1>
+    <p class="text-neutral-500 mb-10">学んだことや作ったものの記録</p>
+
+    <!-- Tags filter -->
+    {allTags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-10 pb-10 border-b border-[#262626]">
+        {allTags.map(tag => <Tag tag={tag} />)}
+      </div>
+    )}
+
+    <!-- Post list -->
+    <div class="space-y-0 divide-y divide-[#1a1a1a]">
+      {posts.map(post => (
+        <article class="group py-6 first:pt-0">
+          <a href={`/blog/${post.id.replace(/\.(md|mdx)$/, '')}`} class="block hover:opacity-80 transition-opacity">
+            <div class="flex items-start justify-between gap-4">
+              <div class="flex-1">
+                <h2 class="text-white font-semibold mb-1 group-hover:text-violet-300 transition-colors">
+                  {post.data.title}
+                </h2>
+                <p class="text-neutral-500 text-sm mb-3">{post.data.description}</p>
+                <div class="flex flex-wrap gap-1.5">
+                  {post.data.tags.map(tag => <Tag tag={tag} />)}
+                </div>
+              </div>
+              <time class="font-mono text-xs text-neutral-600 whitespace-nowrap pt-0.5 shrink-0">
+                {post.data.pubDate.toISOString().slice(0, 10)}
+              </time>
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+
+    {posts.length === 0 && (
+      <p class="text-neutral-600 font-mono text-sm">// まだ記事がありません</p>
+    )}
+  </div>
+</BaseLayout>

@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@theme {
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', ui-monospace, monospace;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --color-accent: #7c3aed;
+  --color-accent-light: #a78bfa;
+  --color-bg: #0d0d0d;
+  --color-surface: #161616;
+  --color-border: #262626;
+  --color-muted: #6b7280;
+}
+
+html {
+  background-color: var(--color-bg);
+  color: #e5e5e5;
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+}
+
+/* Prose styles for blog posts */
+.prose {
+  @apply text-neutral-300 leading-relaxed;
+
+  h1, h2, h3, h4 {
+    @apply text-white font-bold;
+  }
+
+  h2 {
+    @apply text-2xl mt-10 mb-4 pb-2 border-b border-neutral-800;
+  }
+
+  h3 {
+    @apply text-xl mt-8 mb-3;
+  }
+
+  p {
+    @apply mb-5;
+  }
+
+  a {
+    @apply text-violet-400 underline underline-offset-2 hover:text-violet-300 transition-colors;
+  }
+
+  code {
+    @apply font-mono text-sm bg-neutral-800 text-violet-300 px-1.5 py-0.5 rounded;
+  }
+
+  pre {
+    @apply rounded-lg my-6 overflow-x-auto;
+    background: #0d1117 !important;
+  }
+
+  pre code {
+    @apply bg-transparent text-inherit p-0;
+  }
+
+  blockquote {
+    @apply border-l-4 border-violet-500 pl-4 my-6 text-neutral-400 italic;
+  }
+
+  ul {
+    @apply list-disc list-inside mb-5 space-y-1;
+  }
+
+  ol {
+    @apply list-decimal list-inside mb-5 space-y-1;
+  }
+
+  li {
+    @apply text-neutral-300;
+  }
+
+  hr {
+    @apply border-neutral-800 my-8;
+  }
+
+  img {
+    @apply rounded-lg my-6 w-full;
+  }
+
+  strong {
+    @apply text-white font-semibold;
+  }
+
+  table {
+    @apply w-full my-6 border-collapse;
+  }
+
+  th {
+    @apply text-left py-2 px-4 border border-neutral-700 bg-neutral-800 text-white font-semibold;
+  }
+
+  td {
+    @apply py-2 px-4 border border-neutral-800;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Selection */
+::selection {
+  background: rgba(124, 58, 237, 0.3);
+}
