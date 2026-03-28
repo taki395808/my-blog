@@ -1,5 +1,6 @@
 ---
 const year = new Date().getFullYear();
+const base = import.meta.env.BASE_URL;
 ---
 
 <footer class="border-t border-[#262626] mt-16">
@@ -9,7 +10,7 @@ const year = new Date().getFullYear();
       <a href="https://github.com/taki395808" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
         GitHub
       </a>
-<a href={`${import.meta.env.BASE_URL}rss.xml`} class="hover:text-white transition-colors">
+      <a href={`${base}rss.xml`} class="hover:text-white transition-colors">
         RSS
       </a>
     </div>
